@@ -14,9 +14,11 @@ $`x_{t+1}=\mathbf{A}\cdot\mathbf{x}_t`$
 
 Models of this type are known as Markov State Models.
 
-# To run this notebook
+# To run these notebooks
 
-I am using nixos and if you are too, then you can simply do
+## python
+
+I am using nixos and if you are too, then to run the jupyter notebook, you can simply do
 
 ```bash
 nix develop
@@ -31,3 +33,11 @@ source .venv/bin/activate
 pip install ipython jupyter numpy matplotlib
 jupyter notebook
 ```
+
+## wxmaxima
+
+To run the maxima notebook install wxmaxima by either following the instructions [on the
+website](https://wxmaxima-developers.github.io/wxmaxima/download.html) or just installing the package for your
+distribution, and make sure you install gnuplot also.  Note most Linux distros I've used have a package for wxmaxima,
+and on mac homebrew has one.  If you're going to use the terminal version of maxima at all, install `rlwrap` also, and
+always run `rlwrap maxima` rather than just `maxima` to have a much more pleasant experience.
