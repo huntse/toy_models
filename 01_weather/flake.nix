@@ -21,6 +21,7 @@
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
             wxmaxima
+            rlwrap
             gnuplot
             (python3.withPackages (ps:
               with ps; [
