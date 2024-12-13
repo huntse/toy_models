@@ -9,8 +9,8 @@ The most information about the maths behind the model is in the jupyter notebook
 some discrete states with known probabilities that describe, at a given discrete time step, the probability of each state
 at the next time step.
 
-In general if $\mathbf{x}_t$ is the probability of each state at $t$ and $\mathbf{A}$ is the transition matrix, then
-$$x_{t+1}=\mathbf{A}\cdot\mathbf{x}_t$$
+In general if $`\mathbf{x}_t`$ is the probability of each state at $`t`$ and $`\mathbf{A}`$ is the transition matrix, then
+$`x_{t+1}=\mathbf{A}\cdot\mathbf{x}_t`$
 
 Models of this type are known as Markov State Models.
 
