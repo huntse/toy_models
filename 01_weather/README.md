@@ -41,3 +41,8 @@ website](https://wxmaxima-developers.github.io/wxmaxima/download.html) or just i
 distribution, and make sure you install gnuplot also.  Note most Linux distros I've used have a package for wxmaxima,
 and on mac homebrew has one.  If you're going to use the terminal version of maxima at all, install `rlwrap` also, and
 always run `rlwrap maxima` rather than just `maxima` to have a much more pleasant experience.
+
+## Mathematica
+
+You'll need a copy of mathematica, then just load `Weather.nb`. This was developed with version 14.1 but honestly it's
+not doing anything that fancy so would probably work with just about any version.
