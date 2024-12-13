@@ -46,3 +46,126 @@ always run `rlwrap maxima` rather than just `maxima` to have a much more pleasan
 
 You'll need a copy of mathematica, then just load `Weather.nb`. This was developed with version 14.1 but honestly it's
 not doing anything that fancy so would probably work with just about any version.
+
+# Confirming some of the maths
+
+Given the state transition matrix
+```math
+\mathbf{A} = \begin{pmatrix}
+\frac{1}{2} & \frac{1}{2} & \frac{1}{4}\\
+\frac{1}{4} & 0 &\frac{1}{4}\\
+\frac{1}{2} & \frac{1}{2} & \frac{1}{4}
+\end{pmatrix}
+```
+
+## How to find eigenvalues and eigenvectors
+
+We find the eigenvectors of a matrix using the roots of the characteristic polynomial, which is found in matrix form by
+$`\bigl(\mathbf{A}-\lambda\mathbb{I}\bigr)\mathbf{v} = \mathbf{0},`$ where each value of $`\lambda`$ is an eigenvalue
+and each value of $`\mathbf{v}`$ is a corresponding eigenvector. Since an eigenvector cannot be the zero vector, the
+only way for the left-hand side of this equation to give a zero is for $`\mathbf{A}-\lambda\mathbb{I}`$ to be a singular
+matrix, so we are looking in our case for values of $`\lambda`$ such that
+$`\mathop{\mathrm{det}}\bigl(\mathbf{A}-\lambda\mathbb{I}\bigr)=0`$. These are the roots of the characteristic
+polynomial.
+
+## In our case
+
+### Finding Eigenvalues
+```math
+\begin{align*}
+\begin{vmatrix}
+(\frac{1}{2}-\lambda) & \frac{1}{2} & \frac{1}{4}\\
+\frac{1}{4} & -\lambda &\frac{1}{4}\\
+\frac{1}{2} & \frac{1}{2} & (\frac{1}{4}-\lambda)
+\end{vmatrix} &= 0\\
+\end{align*}
+```
+
+To solve this determinant you expand via one of the rows and columns and do a bunch of tedious cancelling.  *Or* you use
+a computer algebra system.  Either way you find that the characteristic polynomial is
+$`-\frac{1}{16}(\lambda-1)(4\lambda-1)(4\lambda+1)=0`$, so the eigenvalues are $`\lambda_1=1`$, $`\lambda_2=\frac{1}{4}`$,
+and $`\lambda_3=-\frac{1}{4}`$.
+
+#### Check on the eigenvalues
+
+The sum of the eigenvalues should be equal to the trace of $`\mathbf{A}`$, so we can see that the sum of our eigenvalues
+is 1 and the trace (sum of values on the diagonal) is also 1 so that seems good. You can also check that the product of
+the eigenvalues is the determinant of A but that's a bit annoying to compute by hand for a 3x3 matrix so I'm not going
+to bother.  I would actually just use a CAS to check the eigenvalues in practise.
+
+### Finding Eigenvectors
+Then, to find eigenvectors corresponding to a particular eigenvalue we need to find general solutions to the eigenvector
+equations corresponding to the determinant above, bearing in mind that this is a singular matrix. So the equations we
+want are
+
+```math
+\begin{align*}
+(\frac{1}{2}-\lambda)x + \frac{1}{2}y +\frac{1}{4}z &= 0\\
+\frac{1}{4}x -\lambda y + \frac{1}{4} z &= 0\\
+\frac{1}{4} x + \frac{1}{2} y + (\frac{1}{2} - \lambda)z &= 0
+\end{align*}
+```
+Thus, when $`\lambda=1`$ let $`z=k`$ so we have
+
+```math
+\begin{align*}
+-\frac{1}{2} + \frac{1}{2}y +\frac{1}{4}k &= 0 & R_1\\
+\frac{1}{4}x -y + \frac{1}{4} k &= 0 & R_2\\
+\frac{1}{4} x + \frac{1}{2} y -\frac{1}{2}k &= 0 & R_3\\
+\frac{3}{4}x -\frac{3}{2}y &= 0 & R_2 - R_1\\
+\frac{3}{4}x &= \frac{3}{2}y &= 0 \\
+2y &= x\\
+\text{Thus}~\frac{1}{2}y + \frac{1}{2}y -\frac{1}{2}k &= 0 & \text{Substitution into}~R_3\\
+y &= \frac{1}{2}k
+\end{align*}
+```
+So we can deduce that any vector of the form
+$`\begin{pmatrix}k & \frac{k}{2} & k\end{pmatrix}^T`$ is an eigenvector of $`\mathbf{A}`$ corresponding to $`\lambda =
+1`$.  For example, let's choose $`\mathbf{v}_1 = \begin{pmatrix}1 & \frac{1}{2} & 1\end{pmatrix}^T`$.
+
+#### Check
+
+We can confirm this is an eigenvector if $`\mathbf{Av} = \lambda\mathbf{v}`$, so let's check that now.
+
+```math
+\begin{pmatrix}
+\frac{1}{2} & \frac{1}{2} & \frac{1}{4}\\
+\frac{1}{4} & 0 &\frac{1}{4}\\
+\frac{1}{2} & \frac{1}{2} & \frac{1}{4}
+\end{pmatrix}
+\begin{pmatrix}
+1 & \frac{1}{2} & 1
+\end{pmatrix} =
+\begin{pmatrix}
+1 & \frac{1}{2} & 1
+\end{pmatrix} = \lambda
+\begin{pmatrix}
+1 & \frac{1}{2} & 1
+\end{pmatrix}
+```
+So
+$`\mathbf{Av} = \lambda\mathbf{v}`$, and $`\mathbf{v}_1 = \begin{pmatrix}1 & \frac{1}{2} & 1\end{pmatrix}^T`$ is
+confirmed to be an eigenvector of $`\mathbf{A}`$ corresponding to $`\lambda=1`$.
+
+### Normalization
+
+Ok the final step of our pencil and paper confirmation of Steve's model is that the steady state probability found by
+the model should lie on this eigenvector.  To check this we will divide $`v`$ by the sum of its components so that the
+resulting vector has components that add up to 1 and therefore could be a probability distribution.
+
+```math
+\begin{align*}
+s &= \sum_{k=1}^3 v_k = 1 + \frac{1}{2} + 1
+&= \frac{5}{2}\\
+\mathbf{w} &= \frac{\mathbf{v}}{s}\\
+&= \begin{pmatrix}
+\frac{2}{5} \\ \frac{2}{10} \\ \frac{2}{5}
+\end{pmatrix}\\
+&= \begin{pmatrix}
+0.4 \\ 0.2 \\ 0.4
+\end{pmatrix}
+\end{align*}
+```
+
+We will compare $`\mathbf{w}`$ to the results returned by our simulation.
+
