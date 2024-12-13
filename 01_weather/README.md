@@ -142,7 +142,7 @@ We can confirm this is an eigenvector if $`\mathbf{Av} = \lambda\mathbf{v}`$, so
 1 \\ \frac{1}{2} \\ 1
 \end{pmatrix} = \lambda
 \begin{pmatrix}
-1 & \frac{1}{2} & 1
+1 \\ \frac{1}{2} \\ 1
 \end{pmatrix}
 ```
 So
