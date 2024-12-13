@@ -57,6 +57,8 @@ Given the state transition matrix
 \frac{1}{2} & \frac{1}{2} & \frac{1}{4}
 \end{pmatrix}
 ```
+We need to confirm that one of the eigenvalues is 1, find the corresponding eigenvector and then normalize it, which
+should be the steady-state probability of our simulation if everything is correct.
 
 ## How to find eigenvalues and eigenvectors
 
@@ -74,9 +76,9 @@ polynomial.
 ```math
 \begin{align*}
 \begin{vmatrix}
-(\frac{1}{2}-\lambda) & \frac{1}{2} & \frac{1}{4}\\
+\left(\frac{1}{2}-\lambda\right) & \frac{1}{2} & \frac{1}{4}\\
 \frac{1}{4} & -\lambda &\frac{1}{4}\\
-\frac{1}{2} & \frac{1}{2} & (\frac{1}{4}-\lambda)
+\frac{1}{2} & \frac{1}{2} & \left(\frac{1}{4}-\lambda\right)
 \end{vmatrix} &= 0\\
 \end{align*}
 ```
@@ -100,9 +102,9 @@ want are
 
 ```math
 \begin{align*}
-(\frac{1}{2}-\lambda)x + \frac{1}{2}y +\frac{1}{4}z &= 0\\
+\left(\frac{1}{2}-\lambda\right)x + \frac{1}{2}y +\frac{1}{4}z &= 0\\
 \frac{1}{4}x -\lambda y + \frac{1}{4} z &= 0\\
-\frac{1}{4} x + \frac{1}{2} y + (\frac{1}{2} - \lambda)z &= 0
+\frac{1}{4} x + \frac{1}{2} y + \left(\frac{1}{2} - \lambda\right)z &= 0
 \end{align*}
 ```
 Thus, when $`\lambda=1`$ let $`z=k`$ so we have
@@ -113,9 +115,9 @@ Thus, when $`\lambda=1`$ let $`z=k`$ so we have
 \frac{1}{4}x -y + \frac{1}{4} k &= 0 & R_2\\
 \frac{1}{4} x + \frac{1}{2} y -\frac{1}{2}k &= 0 & R_3\\
 \frac{3}{4}x -\frac{3}{2}y &= 0 & R_2 - R_1\\
-\frac{3}{4}x &= \frac{3}{2}y &= 0 \\
+\frac{3}{4}x &= \frac{3}{2}y \\
 2y &= x\\
-\text{Thus}~\frac{1}{2}y + \frac{1}{2}y -\frac{1}{2}k &= 0 & \text{Substitution into}~R_3\\
+\text{Thus}~\frac{1}{2}y + \frac{1}{2}y -\frac{1}{2}k &= 0 & \text{...by substitution into}~R_3\\
 y &= \frac{1}{2}k
 \end{align*}
 ```
@@ -134,10 +136,10 @@ We can confirm this is an eigenvector if $`\mathbf{Av} = \lambda\mathbf{v}`$, so
 \frac{1}{2} & \frac{1}{2} & \frac{1}{4}
 \end{pmatrix}
 \begin{pmatrix}
-1 & \frac{1}{2} & 1
+1 \\ \frac{1}{2} \\ 1
 \end{pmatrix} =
 \begin{pmatrix}
-1 & \frac{1}{2} & 1
+1 \\ \frac{1}{2} \\ 1
 \end{pmatrix} = \lambda
 \begin{pmatrix}
 1 & \frac{1}{2} & 1
