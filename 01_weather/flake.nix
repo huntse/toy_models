@@ -31,7 +31,9 @@
                 matplotlib
               ]))
           ];
-          #        shellHook = "jupyter notebook";
+          #Uncomment this if you don't care about maxima and want `nix develop`
+          #to just run the notebook for you. Most convenient.
+          #shellHook = "jupyter notebook";
         };
       }
     );

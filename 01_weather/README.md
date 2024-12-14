@@ -12,7 +12,9 @@ at the next time step.
 In general if $`\mathbf{x}_t`$ is the probability of each state at $`t`$ and $`\mathbf{A}`$ is the transition matrix, then
 $`x_{t+1}=\mathbf{A}\cdot\mathbf{x}_t`$
 
-Models of this type are known as Markov State Models.
+Models of this type are known as Markov State Models. The Markov property means that the model's state at time $`t+1`$
+depends only on the state at time $`t`$, and because the model has discrete time steps and a finite state space it is a
+discrete time Markov chain.
 
 # To run these notebooks
 
